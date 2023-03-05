@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.scada.dao.UserDao">
+	<!-- 로그인 -->
+	<select id="login" parameterType="com.scada.dao.UserDao" resultType="com.scada.dao.UserDao">
+        SELECT id, password FROM user
+        WHERE id = #{id } and password = #{password }
+    </select>
+    
+    <!-- 회원 가입 -->
+    <insert id="join" parameterType="com.scada.dao.UserDao">
+        INSERT INTO user(id, password, email, name, birth, phone_number, profile_url, role)
+        VALUES (#{id }, #{password }, #{email }, #{name }, #{birth }, #{phoneNumber }, #{profileUrl }, 0)
+    </insert>
+
+
+</mapper>
