@@ -1,6 +1,6 @@
 package com.scada.config.jwt;
 
-import io.jsonwebtoken.*;  
+import io.jsonwebtoken.*;   
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,10 +31,11 @@ public class JwtTokenProvider {
     }
 
     public String generateToken(Authentication authentication) {
+    	System.out.println("authentication: " + authentication);
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
-
+        System.out.println("authorities: " + authorities);
         //Access Token 생성
         return Jwts.builder()
                 .setSubject(authentication.getName())

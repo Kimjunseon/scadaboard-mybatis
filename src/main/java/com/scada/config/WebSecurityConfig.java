@@ -42,6 +42,9 @@ public class WebSecurityConfig  {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		// 모든 권한에 대한 요청 접근 가능
 		http
+			.httpBasic().disable()
+			.authorizeRequests().antMatchers().permitAll()
+			.and()
 			.authorizeRequests().anyRequest().permitAll()
 			.and()
 		// 시큐리티 권한이 없을 때, post 요청이 막힐 때 사용? 

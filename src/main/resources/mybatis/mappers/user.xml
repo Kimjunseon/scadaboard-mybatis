@@ -10,6 +10,11 @@
         WHERE id = #{id } and password = #{password }
     </select>
     
+    <select id="findByUserId" parameterType="com.scada.dao.UserDao" resultType="com.scada.dao.UserDao">
+        SELECT id, password FROM user
+        WHERE id = #{id }
+    </select>
+    
     <!-- 회원 가입 -->
     <insert id="join" parameterType="com.scada.dao.UserDao">
         INSERT INTO user(id, password, email, name, birth, phone_number, profile_url, role)

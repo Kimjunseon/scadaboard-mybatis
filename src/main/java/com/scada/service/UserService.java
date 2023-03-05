@@ -5,11 +5,11 @@ import javax.transaction.Transactional;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.scada.Dto.UserDto;
-import com.scada.config.jwt.JwtToken;
 import com.scada.config.jwt.JwtTokenProvider;
 import com.scada.dao.UserDao;
 
@@ -30,14 +30,18 @@ public class UserService {
         return n > 0;
     }
 	
-	public String login(String email, String password) {
-		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
-
+	public String login(String id, String password) {
+		System.out.println("id: " + id);
+		System.out.println("password: " + password);
+		
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(id, password);
+		System.out.println("authenticationToken: " + authenticationToken);
         // 검증
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
         // 검증된 인증 정보로 JWT 토큰 생성
         String token = jwtTokenProvider.generateToken(authentication);
+        System.out.println("token: " + token);
 
         return token;
 	}

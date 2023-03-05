@@ -50,7 +50,9 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody Map<String, String> checkLogin) {
-		String token = userService.login(checkLogin.get("name"), checkLogin.get("password"));
+		System.out.println("checkLogin: " + checkLogin);
+		String token = userService.login(checkLogin.get("id"), checkLogin.get("password"));
+		System.out.println("token: " + token);
 		logger.info("UserController login()");
 		return ResponseEntity.ok(token);
 	}
