@@ -10,8 +10,7 @@ import com.scada.Dto.UserDto;
 @Mapper
 @Repository
 public interface UserDao {
-	Optional<UserDto> findByUserId(String id);
+	String login(String id);
 	int join(UserDto dto);
-	UserDto login(UserDto dto);
 
 }

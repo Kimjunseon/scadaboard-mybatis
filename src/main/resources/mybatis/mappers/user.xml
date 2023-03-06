@@ -5,13 +5,8 @@
         
 <mapper namespace="com.scada.dao.UserDao">
 	<!-- 로그인 -->
-	<select id="login" parameterType="com.scada.dao.UserDao" resultType="com.scada.dao.UserDao">
-        SELECT id, password FROM user
-        WHERE id = #{id } and password = #{password }
-    </select>
-    
-    <select id="findByUserId" parameterType="com.scada.dao.UserDao" resultType="com.scada.dao.UserDao">
-        SELECT id, password FROM user
+	<select id="login" parameterType="com.scada.dao.UserDao" resultType="String">
+        SELECT password FROM user
         WHERE id = #{id }
     </select>
     

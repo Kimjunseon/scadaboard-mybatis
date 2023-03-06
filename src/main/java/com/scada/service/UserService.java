@@ -1,16 +1,13 @@
 package com.scada.service;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.scada.Dto.UserDto;
-import com.scada.config.jwt.JwtTokenProvider;
 import com.scada.dao.UserDao;
 
 import lombok.RequiredArgsConstructor;
@@ -20,30 +17,30 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserService {
 	private final UserDao dao;
-	private final JwtTokenProvider jwtTokenProvider;
-    private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManagerBuilder authenticationManagerBuilder;
-    
     
 	public boolean join(UserDto dto) {
         int n = dao.join(dto);
         return n > 0;
     }
 	
-	public String login(String id, String password) {
+	public String login(String id) {
 		System.out.println("id: " + id);
-		System.out.println("password: " + password);
+		// DB에 정보 보내기
+		String userdto = dao.login(id);
 		
-		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(id, password);
-		System.out.println("authenticationToken: " + authenticationToken);
+		// useDto의 값 여부 확인
+		System.out.println("userdto :" + userdto);
+		
+		
         // 검증
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
         // 검증된 인증 정보로 JWT 토큰 생성
-        String token = jwtTokenProvider.generateToken(authentication);
-        System.out.println("token: " + token);
+        // String token = jwtTokenProvider.generateToken();
+        // System.out.println("token: " + token);
 
-        return token;
+        return userdto;
 	}
 
+
 }
+ 

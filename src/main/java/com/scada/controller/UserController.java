@@ -51,10 +51,10 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody Map<String, String> checkLogin) {
 		System.out.println("checkLogin: " + checkLogin);
-		String token = userService.login(checkLogin.get("id"), checkLogin.get("password"));
-		System.out.println("token: " + token);
+		String encodedPassword = userService.login(checkLogin.get("id"));
+		boolean encPassword = bCryptPasswordEncoder.matches(checkLogin.get("password"), encodedPassword);
 		logger.info("UserController login()");
-		return ResponseEntity.ok(token);
+		return ResponseEntity.ok(encPassword + "");
 	}
 	
 }
