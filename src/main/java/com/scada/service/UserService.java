@@ -21,7 +21,7 @@ public class UserService {
 	public boolean join(UserDto dto) {
         int n = dao.join(dto);
         return n > 0;
-    }
+    } 
 	
 	public String login(String id) {
 		System.out.println("id: " + id);
