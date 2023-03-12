@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,9 +33,14 @@ public class UserDto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
 	
+	
+	@NotNull
+	@Size(min=1, max=50)
 	@Column(unique = true)
 	private String id;
 	
+	@NotNull
+	@Size(min=8, max=50, message = "비밀번호 오류!")
 	private String password;
 	
 	@Column(unique = true)

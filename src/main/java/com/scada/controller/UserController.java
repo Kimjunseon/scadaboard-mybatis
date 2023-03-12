@@ -2,6 +2,8 @@ package com.scada.controller;
 
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.scada.Dto.UserDto;
-import com.scada.config.jwt.JwtToken;
 import com.scada.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class UserController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@PostMapping("/join")
-    public ResponseEntity join(@RequestBody UserDto dto) {
+    public ResponseEntity join(@Valid @RequestBody UserDto dto) {
 		String rawPassword = dto.getPassword();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 		dto.setPassword(encPassword);
