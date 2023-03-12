@@ -29,13 +29,15 @@ import lombok.Setter;
 @AllArgsConstructor
 
 public class UserDto {
+	// 컨트롤러별로 로직이 다를 때, 회원가입 시나 비밀번호 수정 시에는 어떻게 구현해야 될 지?  
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
 	
 	
 	@NotNull
-	@Size(min=1, max=50)
+	@Size(min=1, max=50, message = "아이디 오류!")
 	@Column(unique = true)
 	private String id;
 	
@@ -48,6 +50,9 @@ public class UserDto {
 	
 	private String name;
 	private String birth;
+	
+	@NotNull
+	@Size(min=8, max=50, message = "전화번호 오류!")
 	private String phoneNumber;
 	private String profileUrl;
 	
