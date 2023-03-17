@@ -19,11 +19,11 @@ public class ReviewController {
 	
 	// 영화에 대한 리뷰 CRUD 하는 컨트롤러
 	// 리뷰 생성
-	@PostMapping("/addReview")
-	public ResponseEntity addReview(@Valid @RequestBody ReviewDto reviewDto) {
+	// @PostMapping("/addReview")
+	// public ResponseEntity addReview(@Valid @RequestBody ReviewDto reviewDto) {
 		// 리뷰테이블에 필요한 데이터 생각해보기
 		
-	}
+	//}
 	
 	
 }
